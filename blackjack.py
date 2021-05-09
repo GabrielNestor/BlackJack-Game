@@ -7,6 +7,18 @@ except ImportError:  # python 2
 
 
 def load_images(card_images):
+    """
+    Build up filenames of the card images and store them in a list.
+
+    The method builds up the name of each suit and face card
+    while saving them in a list given as a parameter, along with
+    their value, in a tuple.
+    It was not necessarily to make this procedure a method since
+    it will only be used once, reason being to tidy up the code.
+    :param card_images: a list that will store tuples containing
+    the cards along with their value
+    :return:None
+    """
     suits = ['heart', 'club', 'diamond', 'spade']
     face_cards = ['jack', 'queen', 'king']
 
@@ -31,6 +43,14 @@ def load_images(card_images):
 
 
 def _deal_card(frame):
+    """
+    Display the card from the deck on the frame and return it.
+
+    The method removes a card from the top of the deck, adding it to
+    the frame specified as parameter.
+    :param frame: frame that will receive the card
+    :return:tuple containing the card value and the image of it
+    """
     # pop the next card off the top of the deck
     next_card = deck.pop(0)
     # and add it to back of the pack
@@ -42,6 +62,16 @@ def _deal_card(frame):
 
 
 def score_hand(hand):
+    """
+    Calculate the total score of all cards in the hand.
+
+    The method calculates the score of the player or dealer's hand.
+    The first ace in the hand will have the value 11, while the next ones
+    will be reduced to 1, in order to not bust while having 2 or more aces.
+    If the score goes above 21, the hand will bust.
+    :param hand: list with tuples containing the card and its value
+    :return:int representing the score calculated
+    """
     # Calculate the total score of all cards in the list.
     # Only one ace can have the value 11, and this will be reduce to 1 if the hand would bust.
     score = 0
