@@ -90,6 +90,19 @@ def score_hand(hand):
 
 
 def deal_dealer():
+    """
+    Add cards to the dealer hand and calculate the score.
+
+    The method is assigned to the dealer button. It adds
+    random cards to the dealer hand while calculating the
+    score using the score_hand method.
+    It compares dealer_score with player_score while
+    also checking the other outcomes of the game.
+    The dealer will deal cards until his score is above
+    or equal to 17. Initially the dealer will draw 1 card.
+    The player starts with 2 cards.
+    :return:None
+    """
     dealer_score = score_hand(dealer_hand)
     while 0 < dealer_score < 17:
         dealer_hand.append(_deal_card(dealer_card_frame))
@@ -108,6 +121,15 @@ def deal_dealer():
 
 
 def deal_player():
+    """
+    Add cards to the player hand and calculates the score.
+
+    The method is assigned to the player button. It adds
+    random cards to the player hand while calculating the
+    score using the score_hand method.
+    If the player_score goes above 21, the dealer wins.
+    :return:None
+    """
     player_hand.append(_deal_card(player_card_frame))
     player_score = score_hand(player_hand)
 
