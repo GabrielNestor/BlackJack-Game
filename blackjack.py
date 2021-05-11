@@ -73,7 +73,8 @@ def score_hand(hand):
     :return:int representing the score calculated
     """
     # Calculate the total score of all cards in the list.
-    # Only one ace can have the value 11, and this will be reduce to 1 if the hand would bust.
+    # Only one ace can have the value 11, further aces
+    # will be reduced to 1 so the hand won't bust.
     score = 0
     ace = False
     for next_card in hand:
