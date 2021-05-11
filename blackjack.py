@@ -53,7 +53,7 @@ def _deal_card(frame):
     """
     # pop the next card off the top of the deck
     next_card = deck.pop(0)
-    # and add it to back of the pack
+    # and add it to back of the packso we won't run out of cards
     deck.append(next_card)
     # add the image to a Label and display the label
     tkinter.Label(frame, image=next_card[1], relief='raised').pack(side='left')
@@ -139,6 +139,13 @@ def deal_player():
 
 
 def initial_deal():
+    """
+    Make the initial deal
+
+    The method deals 2 cards to the player and 1
+    to the dealer
+    :return: None
+    """
     deal_player()
     dealer_hand.append(_deal_card(dealer_card_frame))
     dealer_score_label.set(score_hand(dealer_hand))
@@ -146,31 +153,52 @@ def initial_deal():
 
 
 def new_game():
+    """
+    Destroy the dealer and player card frames and create a new game
+
+    The method destroys the existing card frames and recreates them.
+    The method is assigned to the "new game" button.
+    :return: None
+    """
     global dealer_card_frame
     global player_card_frame
-    global dealer_hand
-    global player_hand
+
     # embedded frame to hold the card images
     dealer_card_frame.destroy()
     dealer_card_frame = tkinter.Frame(card_frame, background='green')
     dealer_card_frame.grid(row=0, column=1, sticky='ew', rowspan=2)
+
     # embedded frame to hold the card images
+    player_card_frame.destroy()
     player_card_frame = tkinter.Frame(card_frame, background="green")
     player_card_frame.grid(row=2, column=1, sticky='ew', rowspan=2)
 
+    # clear the score
     result_text.set("")
 
-    # Create the list to store the dealer's and player's hands
-    dealer_hand = []
-    player_hand = []
+    # clear both hands
+    dealer_hand.clear()
+    player_hand.clear()
     initial_deal()
 
 
 def shuffle():
+    """
+    Shuffle the deck
+
+    The method shuffles the list representing the deck
+    using the shuffle method.
+    :return: None
+    """
     random.shuffle(deck)
 
 
 def play():
+    """
+    Starts the game.
+
+    :return: None
+    """
     initial_deal()
     mainWindow.mainloop()
 
@@ -200,6 +228,7 @@ player_score_label = tkinter.IntVar()
 
 tkinter.Label(card_frame, text="Player", background="green", fg="white").grid(row=2, column=0)
 tkinter.Label(card_frame, textvariable=player_score_label, background="green", fg="white").grid(row=3, column=0)
+
 # embedded frame to hold the card images
 player_card_frame = tkinter.Frame(card_frame, background="green")
 player_card_frame.grid(row=2, column=1, sticky='ew', rowspan=2)
@@ -223,6 +252,7 @@ shuffle_button.grid(row=0, column=3)
 cards = []
 load_images(cards)
 print(cards)
+
 # Create a new deck of cards and shuffle them
 deck = list(cards) + list(cards) + list(cards)
 shuffle()
